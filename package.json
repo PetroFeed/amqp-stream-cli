@@ -1,0 +1,21 @@
+{
+  "name": "amqp-stream-cli",
+  "version": "0.1.2",
+  "description": "Stream data to an AMQP server from the command-line.",
+  "main": "amqp-stream",
+  "bin": {
+    "amqp-stream": "./amqp-stream"
+  },
+  "author": "PetroFeed Inc.",
+  "homepage": "http://petrofeed.com",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PetroFeed/amqp-stream-cli.git"
+  },
+  "dependencies": {
+    "amqp": "^0.2.0",
+    "amqp-stream": "^0.1.0",
+    "binary-split": "^0.1.2",
+    "docopt": "^0.4.1"
+  }
+}

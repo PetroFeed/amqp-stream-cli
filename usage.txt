@@ -1,0 +1,12 @@
+Send AMQP messages from the command line.
+
+Usage:
+  ampq-stream [options]
+
+Options:
+  -h --help                     Show this screen.
+  --version                     Show version.
+
+  --url=<url>                   AMQP server to connect to.                      [default: amqp://guest@localhost//]
+  --exchange=<exchange>         If using an exchange, set it with this option.
+  --routing-key=<#>             Sets the routing key used for reads/writes.     [default: #]

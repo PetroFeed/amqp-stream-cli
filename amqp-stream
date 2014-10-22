@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var doc = require('fs').readFileSync(require('path').resolve(__dirname, 'usage.txt'), 'utf8');
+var options = require('docopt').docopt(doc, { version: require('./package').version });
+
+/* - */
+
+var amqp = require('amqp');
+var amqpStream = require('amqp-stream');
+var split = require('binary-split');
+
+var connection = amqp.createConnection({ url: options['--url'] });
+connection.on('error', bail);
+
+var options = {
+  connection      : connection,
+  routingKey      : options['--routing-key'],
+  exchange        : options['--exchange'],
+  exchangeOptions : { noDeclare: true }
+};
+
+amqpStream(options, function (error, stream) {
+  if (error) return bail(error);
+  process.stdin.on('close', connection.disconnect.bind(connection));
+  process.stdin.pipe(split()).pipe(stream);
+});
+
+function bail (error) {
+  console.error('Error:', error.message);
+  process.exit(1);
+}
